@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+# go-api-project
+
+This project was created with Go, Next.js, Material UI, and the CoinGecko API.  
+
 ## Getting Started
 
 First, run the development server:
