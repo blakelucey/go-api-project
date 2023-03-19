@@ -11,7 +11,10 @@ import {
   ThemeProvider,
   createTheme,
   Pagination,
+  Stack,
 } from "@mui/material";
+import StickyFooter from "../components/Footer";
+import styles from "./index.module.css";
 
 const theme = createTheme({
   palette: {
@@ -87,42 +90,68 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" sx={{ my: 10 }}>
-        <Typography variant="h1" align="center">
-          Coins
-        </Typography>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">
-                <Typography color="#fff">Name</Typography>
-              </TableCell>
-              <TableCell align="center">
-                <Typography color="#fff">Symbol</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {displayCoins.map((coin: any) => (
-              <TableRow key={coin.id}>
-                <TableCell align="center">
-                  <Typography color="#fff">{coin.name}</Typography>
+      <Container maxWidth="md" sx={{ my: 10 }}>
+        <Stack
+          direction="column"
+          justifyContent="space-evenly"
+          alignItems="center"
+          spacing={4}
+          display="flex"
+        >
+          <Stack
+            direction="column"
+            justifyContent="space-evenly"
+            alignItems="center"
+            display="flex"
+          >
+            <Typography variant="h1">Cryptocurrency</Typography>
+            <Typography variant="h4">
+              <i>
+                <u className={styles.underline}>Current Market Prices</u>
+              </i>
+            </Typography>
+          </Stack>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" className={styles.underline}>
+                  <Typography color="#fff" variant="h5">
+                    Name
+                  </Typography>
                 </TableCell>
-                <TableCell align="center">
-                  <Typography color="#fff">{coin.symbol}</Typography>
+                <TableCell align="center" className={styles.underline}>
+                  <Typography color="#fff" variant="h5">
+                    Current Price
+                  </Typography>
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <Pagination
-          count={totalPages}
-          color="secondary"
-          sx={{ my: 5, display: "flex", justifyContent: "center" }}
-          onChange={handleChange}
-          page={page}
-        />
+            </TableHead>
+            <TableBody>
+              {displayCoins.map((coin: any) => (
+                <TableRow key={coin.id}>
+                  <TableCell align="center" className={styles.underline}>
+                    <Typography color="#fff">
+                      {coin.name} ({coin.symbol})
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center" className={styles.underline}>
+                    <Typography color="#fff">{`$${coin.current_price.toFixed(
+                      2
+                    )}`}</Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Pagination
+            count={totalPages}
+            color="primary"
+            onChange={handleChange}
+            page={page}
+          />
+        </Stack>
       </Container>
+      <StickyFooter />
     </ThemeProvider>
   );
 }

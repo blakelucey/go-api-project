@@ -3,7 +3,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # go-api-project
 
-This project was created with Go, Next.js, Material UI, and the CoinGecko API.  
+This is my first Go project.  This project uses Go as a backend to fetch data from the CoinGecko API and display it using a Next.js frontend.  
+
+This project was created with:
+- Go
+- Next.js
+- Material UI
+- CoinGecko API.  
 
 ## Getting Started
 

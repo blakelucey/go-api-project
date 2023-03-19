@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "pm2 start \"./src/pages/api/coin\" && next start",
     "lint": "next lint"
   },
   "dependencies": {

@@ -10,6 +10,7 @@ type Coin struct {
 	Id     string `json:"id"`
 	Symbol string `json:"symbol"`
 	Name   string `json:"name"`
+	CurrentPrice float64 `json:"current_price"`
 }
 
 func main() {
@@ -46,7 +47,9 @@ func fetchCoins() ([]Coin, error) {
 		return nil, err
 	}
 
-	fmt.Println(coins)
+	// for i := range coins {
+	// 	coins[i].CurrentPrice = coins[i].CurrentPrice / 100 // convert to USD
+	// }
 
 	return coins, nil
 }
