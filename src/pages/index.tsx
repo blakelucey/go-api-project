@@ -68,11 +68,17 @@ export default function Home() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/coins`)
-      .then((response) => setCoins(response.data))
-      .catch((error) => console.error(error));
+    const intervalId = setInterval(() => {
+      axios
+        .get(`http://localhost:8080/coins`)
+        .then((response) => setCoins(response.data))
+        .catch((error) => console.error(error));
+    }, 10000); // 10 seconds in milliseconds
+  
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
+  
 
   console.log("Coins: ", coins);
 

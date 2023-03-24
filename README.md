@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # go-api-project
 
-This is my first Go project.  This project uses Go as a backend to fetch data from the CoinGecko API and display it using a Next.js frontend.  
+This is my first Go project.  This project uses Go as a backend to fetch data from the CoinGecko API and display it using a Next.js frontend.  Prices update every 10 seconds. 
 
 This project was created with:
 - Go

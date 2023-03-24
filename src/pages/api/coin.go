@@ -4,25 +4,36 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 type Coin struct {
-	Id     string `json:"id"`
-	Symbol string `json:"symbol"`
-	Name   string `json:"name"`
+	Id           string  `json:"id"`
+	Symbol       string  `json:"symbol"`
+	Name         string  `json:"name"`
 	CurrentPrice float64 `json:"current_price"`
 }
+
+var coins []Coin
 
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/coins", func(w http.ResponseWriter, r *http.Request) {
-		coins, err := fetchCoins()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+	// Start a timer to fetch coins every 10 seconds
+	ticker := time.NewTicker(10 * time.Second)
+	go func() {
+		for range ticker.C {
+			fetchedCoins, err := fetchCoins()
+			if err != nil {
+				fmt.Println("Error fetching coins:", err)
+			} else {
+				coins = fetchedCoins
+				fmt.Println("Fetched coins at", time.Now())
+			}
 		}
+	}()
 
+	mux.HandleFunc("/coins", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "GET")
 		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization")
@@ -31,6 +42,8 @@ func main() {
 	})
 
 	fmt.Println("Listening on :8080")
+
+	// Start the server
 	http.ListenAndServe(":8080", mux)
 }
 
@@ -47,9 +60,7 @@ func fetchCoins() ([]Coin, error) {
 		return nil, err
 	}
 
-	// for i := range coins {
-	// 	coins[i].CurrentPrice = coins[i].CurrentPrice / 100 // convert to USD
-	// }
+	fmt.Println("Coins fetched: ", coins)
 
 	return coins, nil
 }
