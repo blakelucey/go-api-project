@@ -73,7 +73,7 @@ export default function Home() {
         .get(`http://localhost:8080/coins`)
         .then((response) => setCoins(response.data))
         .catch((error) => console.error(error));
-    }, 10000); // 10 seconds in milliseconds
+    }, 2000); // 2 seconds in milliseconds
   
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
