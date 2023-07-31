@@ -70,7 +70,7 @@ export default function Home() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       axios
-        .get(`http://localhost:8080/coins`)
+        .get(`https://go-api-project.vercel.app/coins`)
         .then((response) => setCoins(response.data))
         .catch((error) => console.error(error));
     }, 2000); // 2 seconds in milliseconds
